@@ -14,6 +14,8 @@
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "eslint": "^8.0.1",
@@ -33,8 +35,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,tsx,ts,vue}": [
-      "eslint --fix",
-      "prettier --write"
+      "npm run lint"
+  
     ]
   }
 }
