@@ -25,9 +25,16 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.5.1",
     "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "*",
     "vite": "^3.1.0",
     "vite-plugin-eslint": "^1.8.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,tsx,ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
