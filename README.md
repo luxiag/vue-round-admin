@@ -12,3 +12,6 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 npm i eslint 
 npm init @eslint/confit
 ```
+
+# husky
+<https://github.com/typicode/husky>
