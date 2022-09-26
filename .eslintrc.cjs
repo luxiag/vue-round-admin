@@ -34,5 +34,10 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'vue/no-unused-vars': 'error',
+    // 去除 ts 函数要显式的放回
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    //  开启隐式转换
+    // https://typescript-eslint.io/rules/strict-boolean-expressions/
+    '@typescript-eslint/strict-boolean-expressions': 'off',
   },
 };
