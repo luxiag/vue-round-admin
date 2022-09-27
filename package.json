@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint  src/* --ext .js,.jsx,.ts,.tsx,.vue --fix --quiet ./",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "node ./deploy"
   },
   "dependencies": {
     "vue": "^3.2.37",
