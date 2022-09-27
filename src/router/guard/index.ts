@@ -2,6 +2,7 @@ import nProgress from 'nprogress';
 import type { Router } from 'vue-router';
 
 /*
+https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
 路由守卫：
     - 全局路由守卫
     - 路由独享守卫
