@@ -97,7 +97,7 @@
   });
 </script>
 <style scoped>
-  .content {
+  .view-login {
     display: flex;
     flex-direction: column;
     width: 100vw;

@@ -6,6 +6,7 @@ export const LoginRoute: RouteRecordRaw = {
   component: async () => await import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
   meta: {},
 };
+
 // 从 modules目录动态获取路由
 export const asyncRoutes: RouteRecordRaw[] = [];
 // https://cn.vitejs.dev/guide/features.html#json
