@@ -35,16 +35,33 @@ export class Axios {
   //   拦截器配置
 
   private setupInterceptors() {
+    // 全局 请求拦截器
     this.instance.interceptors.request.use((res: AxiosRequestConfig) => {
-      // 全局 请求拦截器
       return res;
     });
+    // 全局 相应拦截器
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
         return res.data;
       },
       (err: any) => err,
     );
+  }
+
+  async get<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'GET' });
+  }
+
+  async post<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'POST' });
+  }
+
+  async put<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'PUT' });
+  }
+
+  async delete<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'DELETE' });
   }
 
   async request<T>(config: RequestConfig): Promise<T> {
