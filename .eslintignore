@@ -8,3 +8,5 @@
 **/*.sh
 
 /public/*
+
+# /mock/

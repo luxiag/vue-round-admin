@@ -73,4 +73,4 @@ function createAxios(opt?: Partial<AxiosRequestConfig>) {
   );
 }
 
-export const request = createAxios();
+export const http = createAxios();

@@ -1,14 +1,63 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="view-login">
-    <div id="container"></div>
+    <div id="container"> </div>
+    <div class="login-form">
+      <a-form
+        :model="formState"
+        name="basic"
+        :label-col="{ span: 8 }"
+        :wrapper-col="{ span: 16 }"
+        autocomplete="off"
+        @finish="onFinish"
+        @finishFailed="onFinishFailed"
+      >
+        <a-form-item
+          name="username"
+          :rules="[{ required: true, message: 'Please input your username!' }]"
+        >
+          <a-input v-model:value="formState.username" />
+        </a-form-item>
+
+        <a-form-item
+          name="password"
+          :rules="[{ required: true, message: 'Please input your password!' }]"
+        >
+          <a-input-password v-model:value="formState.password" />
+        </a-form-item>
+
+        <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+          <a-button type="primary" html-type="submit">Submit</a-button>
+        </a-form-item>
+      </a-form>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-  import { onMounted, nextTick } from 'vue';
+  import { onMounted, nextTick, reactive } from 'vue';
   import { App } from './js/InfiniteLights.js';
   import { turbulentDistortion } from './js/Distortions.js';
+  import user from '@/api/user';
+  // form
+  interface FormState {
+    username: string;
+    password: string;
+    remember: boolean;
+  }
+  const formState = reactive<FormState>({
+    username: '',
+    password: '',
+    remember: true,
+  });
+  const onFinish = async (values: any) => {
+    const userInfo = await user.loginApi(formState);
+    console.log('Success:', userInfo);
+  };
 
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+  //
   const options = {
     onSpeedUp: () => {},
     onSlowDown: () => {},
@@ -113,6 +162,7 @@
     height: 100%;
     overflow: hidden;
     box-sizing: border-box;
+    position: absolute;
   }
 
   .content__title-wrap {
