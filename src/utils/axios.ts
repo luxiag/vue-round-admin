@@ -37,14 +37,12 @@ export class Axios {
   private setupInterceptors() {
     this.instance.interceptors.request.use((res: AxiosRequestConfig) => {
       // 全局 请求拦截器
-      console.log(res, 'res');
 
       return res;
     });
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        console.log(res, 'res');
-        return res.data;
+        return res.data.result;
       },
       (err: any) => err,
     );
