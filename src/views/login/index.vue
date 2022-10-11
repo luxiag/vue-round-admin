@@ -3,14 +3,14 @@
   <div class="view-login">
     <div id="container"> </div>
     <div class="login-form">
+      <h3>登录</h3>
       <a-form
+        ref="formRef"
         :model="formState"
         name="basic"
-        :label-col="{ span: 8 }"
-        :wrapper-col="{ span: 16 }"
         autocomplete="off"
         @finish="onFinish"
-        @finishFailed="onFinishFailed"
+        @finish-failed="onFinishFailed"
       >
         <a-form-item
           name="username"
@@ -26,32 +26,45 @@
           <a-input-password v-model:value="formState.password" />
         </a-form-item>
 
-        <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-          <a-button type="primary" html-type="submit">Submit</a-button>
+        <a-form-item>
+          <a-button :loading="loading" type="primary" block html-type="submit">登录</a-button>
         </a-form-item>
       </a-form>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-  import { onMounted, nextTick, reactive } from 'vue';
+  import { onMounted, nextTick, reactive, onUnmounted, ref } from 'vue';
   import { App } from './js/InfiniteLights.js';
   import { turbulentDistortion } from './js/Distortions.js';
-  import user from '@/api/user';
+  import { useUserStore } from '@/store/modules/user';
+
+  const userStore = useUserStore();
   // form
   interface FormState {
     username: string;
     password: string;
-    remember: boolean;
+    // remember: boolean;
   }
+  const loading = ref(false);
+  const formRef = ref();
+
   const formState = reactive<FormState>({
     username: '',
     password: '',
-    remember: true,
+    // remember: true,
   });
+
   const onFinish = async (values: any) => {
-    const userInfo = await user.loginApi(formState);
-    console.log('Success:', userInfo);
+    const data = await formRef.value.validate();
+    if (!data) return;
+    loading.value = true;
+    userStore.login(formState);
+    // const userInfo = await user.loginApi(formState);
+    // if (userInfo) {
+    //   console.log(userInfo);
+    // }
+    loading.value = false;
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -144,8 +157,21 @@
       }, 500),
     );
   });
+  onUnmounted(() => {
+    window.removeEventListener(
+      'resize',
+      debounce(() => {
+        nextTick(() => {
+          const height = window.innerHeight;
+          const width = window.innerWidth;
+          myApp?.setSize(width, height, true);
+          //   drawerThree();
+        });
+      }, 500),
+    );
+  });
 </script>
-<style scoped>
+<style scoped lang="less">
   .view-login {
     display: flex;
     flex-direction: column;
@@ -163,6 +189,20 @@
     overflow: hidden;
     box-sizing: border-box;
     position: absolute;
+  }
+  .login-form {
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding-bottom: 0px;
+    z-index: 1;
+    text-align: center;
+    h3 {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+    }
   }
 
   .content__title-wrap {

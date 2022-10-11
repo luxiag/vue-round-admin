@@ -37,14 +37,25 @@ export class Axios {
   private setupInterceptors() {
     this.instance.interceptors.request.use((res: AxiosRequestConfig) => {
       // 全局 请求拦截器
+      console.log(res, 'res');
+
       return res;
     });
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
+        console.log(res, 'res');
         return res.data;
       },
       (err: any) => err,
     );
+  }
+
+  async post<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'POST' });
+  }
+
+  async put<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'PUT' });
   }
 
   async request<T>(config: RequestConfig): Promise<T> {
