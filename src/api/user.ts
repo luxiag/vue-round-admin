@@ -6,7 +6,7 @@ enum Api {
 }
 
 async function loginApi(params: LoginParams) {
-  return await http.post({ url: Api.Login, params });
+  return await http.request({ url: Api.Login, params });
 }
 
 export default { loginApi };
