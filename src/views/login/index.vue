@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="view-login">
-    <div id="container"> </div>
+    <div id="container" ref="container"> </div>
     <div class="login-form">
       <h3>登录</h3>
       <a-form
@@ -16,14 +16,14 @@
           name="username"
           :rules="[{ required: true, message: 'Please input your username!' }]"
         >
-          <a-input v-model:value="formState.username" />
+          <a-input v-model:value="formState.username" placeholder="admin" />
         </a-form-item>
 
         <a-form-item
           name="password"
           :rules="[{ required: true, message: 'Please input your password!' }]"
         >
-          <a-input-password v-model:value="formState.password" />
+          <a-input-password v-model:value="formState.password" placeholder="123456" />
         </a-form-item>
 
         <a-form-item>
@@ -38,7 +38,7 @@
   import { App } from './js/InfiniteLights.js';
   import { turbulentDistortion } from './js/Distortions.js';
   import { useUserStore } from '@/store/modules/user';
-
+  import { useDebounce } from '@/hooks/useDebounce';
   const userStore = useUserStore();
   // form
   interface FormState {
@@ -60,6 +60,7 @@
     if (!data) return;
     loading.value = true;
     userStore.login(formState);
+
     // const userInfo = await user.loginApi(formState);
     // if (userInfo) {
     //   console.log(userInfo);
@@ -70,18 +71,16 @@
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-  //
+  //  动画选项
   const options = {
     onSpeedUp: () => {},
     onSlowDown: () => {},
     // mountainDistortion || LongRaceDistortion || xyDistortion || turbulentDistortion || turbulentDistortionStill || deepDistortionStill || deepDistortion
     distortion: turbulentDistortion,
-
     length: 400,
     roadWidth: 10,
     islandWidth: 2,
     lanesPerRoad: 3,
-
     fov: 90,
     fovSpeedUp: 150,
     speedUp: 2,
@@ -129,46 +128,27 @@
       sticks: 0x03b3c3,
     },
   };
-  const debounce = (fn: () => void, delay: number = 500) => {
-    type Timer = number | null;
-    let timer: Timer = null;
-    return function () {
-      if (timer !== null) clearTimeout(timer);
-      timer = window.setTimeout(fn, delay);
-    };
-  };
   let myApp: App | null = null;
+  // 绘制动画
+  const container = ref();
   const drawerThree = () => {
-    const container = document.getElementById('container');
-    myApp = new App(container, options);
+    myApp = new App(container.value, options);
     myApp.loadAssets().then(myApp.init);
   };
+  const updateScreen = useDebounce(() => {
+    nextTick(() => {
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+      myApp?.setSize(width, height, true);
+      //   drawerThree();
+    });
+  });
   onMounted(() => {
     drawerThree();
-    window.addEventListener(
-      'resize',
-      debounce(() => {
-        nextTick(() => {
-          const height = window.innerHeight;
-          const width = window.innerWidth;
-          myApp?.setSize(width, height, true);
-          //   drawerThree();
-        });
-      }, 500),
-    );
+    window.addEventListener('resize', updateScreen);
   });
   onUnmounted(() => {
-    window.removeEventListener(
-      'resize',
-      debounce(() => {
-        nextTick(() => {
-          const height = window.innerHeight;
-          const width = window.innerWidth;
-          myApp?.setSize(width, height, true);
-          //   drawerThree();
-        });
-      }, 500),
-    );
+    window.removeEventListener('resize', updateScreen);
   });
 </script>
 <style scoped lang="less">

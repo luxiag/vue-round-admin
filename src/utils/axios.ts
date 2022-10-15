@@ -64,6 +64,22 @@ export class Axios {
         });
     });
   }
+
+  async get<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'GET' });
+  }
+
+  async post<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'POST' });
+  }
+
+  async put<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'PUT' });
+  }
+
+  async delete<T = any>(config: RequestConfig): Promise<T> {
+    return await this.request({ ...config, method: 'DELETE' });
+  }
 }
 export enum ContentTypeEnum {
   JSON = 'application/json',
