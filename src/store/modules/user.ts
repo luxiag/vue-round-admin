@@ -37,9 +37,9 @@ export const useUserStore = defineStore({
       if (userInfo) {
         this.setUserInfo(userInfo);
         this.setToken(token);
-        console.log(userInfo, '登录成功');
-        await router.replace(userInfo?.homePath);
+        await router.push(userInfo?.homePath ?? '/');
       }
+      return userInfo;
     },
   },
 });

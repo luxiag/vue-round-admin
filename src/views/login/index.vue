@@ -4,14 +4,7 @@
     <div id="container" ref="container"> </div>
     <div class="login-form">
       <h3>登录</h3>
-      <a-form
-        ref="formRef"
-        :model="formState"
-        name="basic"
-        autocomplete="off"
-        @finish="onFinish"
-        @finish-failed="onFinishFailed"
-      >
+      <a-form ref="formRef" :model="formState" name="basic" autocomplete="off" @finish="onFinish">
         <a-form-item
           name="username"
           :rules="[{ required: true, message: 'Please input your username!' }]"
@@ -39,12 +32,14 @@
   import { turbulentDistortion } from './js/Distortions.js';
   import { useUserStore } from '@/store/modules/user';
   import { useDebounce } from '@/hooks/useDebounce';
+  import { useNotification } from '@/hooks/useMessage';
+
+  const notification = useNotification();
   const userStore = useUserStore();
   // form
   interface FormState {
     username: string;
     password: string;
-    // remember: boolean;
   }
   const loading = ref(false);
   const formRef = ref();
@@ -52,25 +47,19 @@
   const formState = reactive<FormState>({
     username: '',
     password: '',
-    // remember: true,
   });
 
   const onFinish = async (values: any) => {
     const data = await formRef.value.validate();
     if (!data) return;
     loading.value = true;
-    userStore.login(formState);
-
-    // const userInfo = await user.loginApi(formState);
-    // if (userInfo) {
-    //   console.log(userInfo);
-    // }
+    const userInfo = await userStore.login(formState);
+    if (userInfo) {
+      notification.success({ message: userInfo.realName, description: '欢迎回来' });
+    }
     loading.value = false;
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   //  动画选项
   const options = {
     onSpeedUp: () => {},
