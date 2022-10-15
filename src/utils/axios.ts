@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { useUserStore } from '@/store/modules/user';
 
 export interface RequestInterceptors {
   // 请求拦截
@@ -37,8 +38,10 @@ export class Axios {
   private setupInterceptors() {
     // 全局 请求拦截器
     this.instance.interceptors.request.use((res: AxiosRequestConfig) => {
-      // 全局 请求拦截器
-      return res;
+      const userStore = useUserStore();
+      const token = userStore.getToken;
+
+      return { ...res, headers: { ...res.headers, authorization: token } };
     });
     // 全局 相应拦截器
     this.instance.interceptors.response.use(

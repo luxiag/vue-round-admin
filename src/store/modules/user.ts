@@ -4,17 +4,23 @@ import user from '@/api/user';
 import { LoginParams } from '@/api/model/userModel';
 import { router } from '@/router';
 import { store } from '..';
-
+import { routeEnum } from '@/enums/routeEnum';
+import { useAuth } from './auth';
 interface UserState {
-  // Constructs a type by excluding null and undefined from Type.
+  // 用户信息
   userInfo: Nullable<UserInfo>;
+  // 用户  token
   token?: string;
+  // 最近登录时间
+  lastUpdateTime: number;
 }
+
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
     userInfo: null,
     token: undefined,
+    lastUpdateTime: 0,
   }),
   getters: {
     getUserInfo(): Nullable<UserInfo> {
@@ -26,7 +32,7 @@ export const useUserStore = defineStore({
   },
   actions: {
     setToken(info: string | undefined) {
-      this.token = info ?? '';
+      this.token = info;
     },
     setUserInfo(info: UserInfo | null) {
       this.userInfo = info;
@@ -37,9 +43,18 @@ export const useUserStore = defineStore({
       if (userInfo) {
         this.setUserInfo(userInfo);
         this.setToken(token);
+        const auth = useAuth();
+        this.lastUpdateTime = new Date().getTime();
+        void auth.setAuthOperateFromUserInfo(userInfo.roles);
         await router.push(userInfo?.homePath ?? '/');
       }
+
       return userInfo;
+    },
+    async logout() {
+      this.setToken(undefined);
+      this.setUserInfo(null);
+      void router.push(routeEnum.Login);
     },
   },
 });

@@ -11,6 +11,7 @@ export interface UserModel {
   token: string;
   homePath: string;
   roles: RoleInfo[];
+  avatar: string;
 }
 
 export interface RoleInfo {

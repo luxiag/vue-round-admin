@@ -10,6 +10,7 @@ export function createUserList() {
       password: '123456',
       token: 'admin-token',
       homePath: '/', // 登录跳转主页
+      // 用户操作权限
       roles: [
         {
           roleName: 'admin',
