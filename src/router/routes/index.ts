@@ -17,11 +17,9 @@ Object.keys(modules).forEach(async (key) => {
   // 获取 modules目录下的各文件 default对象
   // const mod = (modules[key] as any).default || {};
   const mod = ((await modules[key]()) as any).default;
-  console.log(mod, 'mod');
+
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   asyncRoutes.push(...modList);
-  console.log(asyncRoutes, 'asyncRoutes push');
 });
-console.log(asyncRoutes, 'asyncRoutes');
 
 export const basicRoutes = [LoginRoute];

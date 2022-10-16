@@ -1,13 +1,17 @@
 import { defineStore } from 'pinia';
 import user from '@/api/user';
-
+import type { RouteRecordRaw } from 'vue-router';
+import { asyncImportRoute } from '@/utils/routeHelper';
+// const layout = async () => await import('@/layout/index.vue');
 interface AuthState {
   // 路由权限列表
-  authRoutes: string[];
+  authRoutes: RouteRecordRaw[];
   // 页面操作权限
   authOperate: {
     [key: string]: any;
   };
+  // 是否添加了动态路由
+  IsAddRoutes: boolean;
 }
 
 interface roleState {
@@ -20,13 +24,17 @@ export const useAuth = defineStore({
   state: (): AuthState => ({
     authRoutes: [],
     authOperate: {},
+    IsAddRoutes: false,
   }),
   getters: {
-    getAuthRoutes(): string[] {
+    getAuthRoutes(): RouteRecordRaw[] {
       return this.authRoutes;
     },
     getAuthOperate(): Object {
       return this.authOperate;
+    },
+    getIsAddRoutes(): Boolean {
+      return this.IsAddRoutes;
     },
   },
   actions: {
@@ -37,9 +45,15 @@ export const useAuth = defineStore({
       });
       this.authOperate = newRoles;
     },
+    // 更具后端接口动态引入路由
     async getAuthRoutesFromApi() {
-      const menu = await user.menuApi();
-      console.log(menu);
+      const routes = await user.menuApi();
+      //   路由动态引入
+      this.authRoutes = asyncImportRoute(routes);
+      //   console.log(menu);
+    },
+    setIsAddRoutes(added: boolean) {
+      this.IsAddRoutes = added;
     },
   },
 });

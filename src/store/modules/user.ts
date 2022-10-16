@@ -45,8 +45,10 @@ export const useUserStore = defineStore({
         this.setToken(token);
         const auth = useAuth();
         this.lastUpdateTime = new Date().getTime();
-        void auth.setAuthOperateFromUserInfo(userInfo.roles);
-        await router.push(userInfo?.homePath ?? '/');
+        await auth.setAuthOperateFromUserInfo(userInfo.roles);
+        await auth.getAuthRoutesFromApi();
+        console.log(userInfo, 'userInfo');
+        await router.push(userInfo?.homePath);
       }
 
       return userInfo;

@@ -84,6 +84,8 @@ export class Axios {
     return await this.request({ ...config, method: 'DELETE' });
   }
 }
+
+//
 export enum ContentTypeEnum {
   JSON = 'application/json',
 }

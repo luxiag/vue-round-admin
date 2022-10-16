@@ -9,7 +9,7 @@ export function createUserList() {
       realName: '管理员',
       password: '123456',
       token: 'admin-token',
-      homePath: '/', // 登录跳转主页
+      homePath: '/dashboard', // 登录跳转主页
       // 用户操作权限
       roles: [
         {
@@ -31,16 +31,10 @@ export default [
         (item) => item.username === username && password === item.password,
       );
       if (!checkUser) {
-        return resultError('没有改用户');
+        return resultError('用户不存在');
       }
-      const { userId, username: _username, token, realName, roles } = checkUser;
-      return resultSuccess({
-        roles,
-        userId,
-        username: _username,
-        token,
-        realName,
-      });
+      // const { userId, username: _username, token, realName, roles } = checkUser;
+      return resultSuccess(checkUser);
     },
   },
   {

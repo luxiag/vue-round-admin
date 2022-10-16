@@ -1,6 +1,8 @@
 import nProgress from 'nprogress';
 import type { Router } from 'vue-router';
-
+import { useAuth } from '@/store/modules/auth';
+import { useUserStore } from '@/store/modules/user';
+import { routeEnum } from '@/enums/routeEnum';
 /*
 https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
 路由守卫：
@@ -9,8 +11,11 @@ https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
     - 组件内的守卫
 */
 
+const whitePathList = [routeEnum.Login];
+
 // 开始路由首位
 export function setupRouterGuard(router: Router) {
+  //  全局路由导航
   createGlobalGuard(router);
   //   导航条
   createProgressGuard(router);
@@ -19,7 +24,29 @@ export function setupRouterGuard(router: Router) {
 // 全局路由守卫
 function createGlobalGuard(router: Router) {
   // 前置守卫
-  router.beforeEach(async (to) => {});
+  router.beforeEach(async (to, from, next) => {
+    const auth = useAuth();
+    const userStore = useUserStore();
+
+    const token = userStore.getToken;
+    if (whitePathList.includes(to.path as routeEnum)) {
+      next();
+    } else if (token) {
+      if (auth.getIsAddRoutes) {
+        next();
+        return;
+      }
+
+      const routes = auth.getAuthRoutes;
+      routes.forEach((route) => {
+        router.addRoute(route);
+      });
+      auth.setIsAddRoutes(true);
+      next({ path: to.fullPath, replace: true });
+    } else {
+      next(routeEnum.Login);
+    }
+  });
   // 后置守卫
   router.afterEach((to) => {});
 }
