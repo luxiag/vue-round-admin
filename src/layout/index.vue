@@ -1,14 +1,22 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <a-layout>
-    <a-layout-sider>Sider</a-layout-sider>
-    <a-layout>
-      <a-layout-header>Header</a-layout-header>
-      <a-layout-content>
-        <router-view></router-view>
-      </a-layout-content>
-      <a-layout-footer>Footer</a-layout-footer>
-    </a-layout>
-  </a-layout>
+  <component :is="LayoutComponent[layout]" />
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { useAppStore } from '@/store/modules/app';
+  import leftTopMode from './leftTopMode/index.vue';
+  import topLeftMode from './topLeftMode/index.vue';
+  import topMode from './topMode/index.vue';
+  // @ts-ignore
+  import leftMode from './leftMode/index.vue';
+
+  const appStore = useAppStore();
+  const layout = appStore.getLayout;
+  //  todo 定义？
+  const LayoutComponent: any = {
+    leftTopMode,
+    topLeftMode,
+    topMode,
+    leftMode,
+  };
+</script>

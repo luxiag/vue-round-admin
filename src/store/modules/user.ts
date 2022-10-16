@@ -5,7 +5,7 @@ import { LoginParams } from '@/api/model/userModel';
 import { router } from '@/router';
 import { store } from '..';
 import { routeEnum } from '@/enums/routeEnum';
-import { useAuth } from './auth';
+import { useAuthStore } from './auth';
 interface UserState {
   // 用户信息
   userInfo: Nullable<UserInfo>;
@@ -16,7 +16,7 @@ interface UserState {
 }
 
 export const useUserStore = defineStore({
-  id: 'user',
+  id: 'UserStore',
   state: (): UserState => ({
     userInfo: null,
     token: undefined,
@@ -43,7 +43,7 @@ export const useUserStore = defineStore({
       if (userInfo) {
         this.setUserInfo(userInfo);
         this.setToken(token);
-        const auth = useAuth();
+        const auth = useAuthStore();
         this.lastUpdateTime = new Date().getTime();
         await auth.setAuthOperateFromUserInfo(userInfo.roles);
         await auth.getAuthRoutesFromApi();

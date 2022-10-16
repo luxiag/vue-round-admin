@@ -1,6 +1,6 @@
 import nProgress from 'nprogress';
 import type { Router } from 'vue-router';
-import { useAuth } from '@/store/modules/auth';
+import { useAuthStore } from '@/store/modules/auth';
 import { useUserStore } from '@/store/modules/user';
 import { routeEnum } from '@/enums/routeEnum';
 /*
@@ -25,7 +25,7 @@ export function setupRouterGuard(router: Router) {
 function createGlobalGuard(router: Router) {
   // 前置守卫
   router.beforeEach(async (to, from, next) => {
-    const auth = useAuth();
+    const auth = useAuthStore();
     const userStore = useUserStore();
 
     const token = userStore.getToken;

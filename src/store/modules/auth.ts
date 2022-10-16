@@ -19,8 +19,8 @@ interface roleState {
   value: any;
 }
 
-export const useAuth = defineStore({
-  id: 'auth',
+export const useAuthStore = defineStore({
+  id: 'AuthStore',
   state: (): AuthState => ({
     authRoutes: [],
     authOperate: {},
