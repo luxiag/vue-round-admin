@@ -20,6 +20,7 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     userInfo: null,
     token: undefined,
+    // 设置为0 在页面刷新的时候 判断 重新请求userInfo
     lastUpdateTime: 0,
   }),
   getters: {
@@ -27,12 +28,16 @@ export const useUserStore = defineStore({
       return this.userInfo;
     },
     getToken(): string | undefined {
-      return this.token;
+      return this.token ?? (window.localStorage.getItem('TOKEN_KEY') as string);
+    },
+    getLastUpdateTime(): number {
+      return this.lastUpdateTime;
     },
   },
   actions: {
     setToken(info: string | undefined) {
-      this.token = info;
+      this.token = info ?? '';
+      window.localStorage.setItem('TOKEN_KEY', info ?? '');
     },
     setUserInfo(info: UserInfo | null) {
       this.userInfo = info;
@@ -40,17 +45,21 @@ export const useUserStore = defineStore({
     async login(param: LoginParams) {
       const userInfo = await user.loginApi(param);
       const { token } = userInfo;
-      if (userInfo) {
-        this.setUserInfo(userInfo);
+      if (token) {
         this.setToken(token);
-        const auth = useAuthStore();
-        this.lastUpdateTime = new Date().getTime();
-        await auth.setAuthOperateFromUserInfo(userInfo.roles);
-        await auth.getAuthRoutesFromApi();
-        console.log(userInfo, 'userInfo');
-        await router.push(userInfo?.homePath);
       }
 
+      return await this.getUserInfoFromToken();
+    },
+    async getUserInfoFromToken() {
+      if (!this.getToken) return null;
+      const userInfo = await user.userInfo();
+      this.setUserInfo(userInfo);
+      const auth = useAuthStore();
+      this.lastUpdateTime = new Date().getTime();
+      await auth.setAuthOperateFromUserInfo(userInfo.roles);
+      await auth.getAuthRoutesFromApi();
+      await router.push(userInfo?.homePath);
       return userInfo;
     },
     async logout() {
