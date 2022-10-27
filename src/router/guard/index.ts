@@ -32,6 +32,10 @@ function createGlobalGuard(router: Router) {
     if (whitePathList.includes(to.path as routeEnum)) {
       next();
     } else if (token) {
+      if (userStore.getLastUpdateTime === 0) {
+        await userStore.getUserInfoFromToken();
+      }
+
       if (auth.getIsAddRoutes) {
         next();
         return;

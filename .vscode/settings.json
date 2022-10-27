@@ -3,6 +3,7 @@
         "Antd",
         "commitlint",
         "Persistedstate",
-        "Pinia"
+        "Pinia",
+        "Sider"
     ]
 }

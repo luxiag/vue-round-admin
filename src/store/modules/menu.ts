@@ -1,3 +1,4 @@
+import piniaPersistConfig from '@/config/piniaPersist';
 import { defineStore } from 'pinia';
 
 interface MenuState {
@@ -23,10 +24,12 @@ export const useMenuStore = defineStore({
   },
   actions: {
     setCollapse() {
+      console.log('setCollapse', this.isCollapse);
       this.isCollapse = !this.isCollapse;
     },
     setMenuList(menuList: Menu.MenuOptions[]) {
       this.menuList = menuList;
     },
   },
+  persist: piniaPersistConfig('MenuStore'),
 });

@@ -38,6 +38,17 @@ export default [
     },
   },
   {
+    url: '/getUserInfo',
+    method: 'get',
+    response: (request: requestParams) => {
+      const token = request.headers?.authorization;
+      if (!token) return resultError('Invalid token!');
+      const checkUser = createUserList().find((item) => item.token === token);
+      if (!checkUser) return resultError('Invalid user token!');
+      return resultSuccess(checkUser);
+    },
+  },
+  {
     url: '/test',
     timeout: 200,
     method: 'get',

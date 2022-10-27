@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 import user from '@/api/user';
 import type { RouteRecordRaw } from 'vue-router';
 import { asyncImportRoute } from '@/utils/routeHelper';
+import { useMenuStore } from '@/store/modules/menu';
+
 // const layout = async () => await import('@/layout/index.vue');
 interface AuthState {
   // 路由权限列表
@@ -48,9 +50,13 @@ export const useAuthStore = defineStore({
     // 更具后端接口动态引入路由
     async getAuthRoutesFromApi() {
       const routes = await user.menuApi();
+
       //   路由动态引入
       this.authRoutes = asyncImportRoute(routes);
-      //   console.log(menu);
+      // 获取菜单页面
+      const menuStore = useMenuStore();
+      // 设置路由菜单
+      menuStore.setMenuList(routes);
     },
     setIsAddRoutes(added: boolean) {
       this.IsAddRoutes = added;
