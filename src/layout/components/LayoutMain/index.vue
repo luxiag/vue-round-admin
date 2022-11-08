@@ -5,4 +5,6 @@
     Content
   </a-layout-content>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { LayoutContent as ALayoutContent } from 'ant-design-vue';
+</script>

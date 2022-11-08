@@ -1,21 +1,21 @@
 <template>
   <layout class="left-top-mode">
-    <layout-sider v-model:collapsed="isCollapse" collapsible>
-      <Sider />
-    </layout-sider>
+    <LayoutSider />
     <layout>
-      <layout-header style="background: #fff; padding: 0"> <Header /></layout-header>
-      <layout-content><Main /></layout-content>
-      <layout-footer><Footer /></layout-footer>
+      <LayoutHeader />
+      <LayoutTabs />
+      <LayoutMain />
+      <LayoutFooter />
     </layout>
   </layout>
 </template>
 <script setup lang="ts">
-  import { Layout, LayoutSider, LayoutHeader, LayoutContent, LayoutFooter } from 'ant-design-vue';
-  import Sider from '../components/Sider/index.vue';
-  import Header from '../components/Header/index.vue';
-  import Main from '../components/Main/index.vue';
-  import Footer from '../components/Footer/index.vue';
+  import { Layout } from 'ant-design-vue';
+  import LayoutSider from '../components/LayoutSider/index.vue';
+  import LayoutHeader from '../components/LayoutHeader/index.vue';
+  import LayoutMain from '../components/LayoutMain/index.vue';
+  import LayoutFooter from '../components/LayoutFooter/index.vue';
+  import LayoutTabs from '../components/LayoutTabs/index.vue';
   import { useMenuStore } from '@/store/modules/menu';
   import { storeToRefs } from 'pinia';
   import { watch } from 'vue';
