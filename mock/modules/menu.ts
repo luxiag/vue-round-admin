@@ -3,13 +3,19 @@ import { MockMethod } from 'vite-plugin-mock';
 import { createUserList } from './user';
 const dashboardRoute = {
   path: '/dashboard',
-  name: 'Dashboard',
+  title: 'Dashboard',
   component: 'LAYOUT',
   redirect: '/dashboard/analysis',
   children: [
     {
       path: 'analysis',
+      title: 'analysis',
       component: '/dashboard/analysis/index',
+    },
+    {
+      path: 'workbench',
+      title: 'workbench',
+      component: '/dashboard/workbench/index',
     },
   ],
 };

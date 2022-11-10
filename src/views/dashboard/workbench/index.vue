@@ -1,5 +1,5 @@
 <template>
-  <div>analysis</div>
+  <div>workbench</div>
 </template>
 <script setup lang="ts"></script>
 <style lang="less" scoped></style>
