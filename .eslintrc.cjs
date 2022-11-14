@@ -72,4 +72,5 @@ module.exports = {
     //   },
     // ],
   },
+  globals: { defineOptions: 'writable', Menu: 'writable' },
 };

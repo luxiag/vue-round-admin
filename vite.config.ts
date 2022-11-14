@@ -2,6 +2,7 @@ import type { UserConfig, ConfigEnv } from 'vite';
 
 import vue from '@vitejs/plugin-vue';
 import viteEslint from 'vite-plugin-eslint';
+import DefineOptions from 'unplugin-vue-define-options/vite';
 // mock 数据模拟
 import { viteMockServe } from 'vite-plugin-mock';
 import { resolve } from 'path';
@@ -18,6 +19,7 @@ const viteConfig = ({ command, mode }: ConfigEnv): UserConfig => {
   return {
     plugins: [
       vue(),
+      DefineOptions(),
       viteEslint(),
       viteMockServe({
         ignore: /^_/,
