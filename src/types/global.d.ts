@@ -9,6 +9,7 @@ declare namespace Menu {
     icon?: string;
     isLink?: string;
     close?: boolean;
+    meta?: Partial<RouteMeta>;
     children?: MenuOptions[];
   }
 }

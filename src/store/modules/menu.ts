@@ -24,7 +24,6 @@ export const useMenuStore = defineStore({
   },
   actions: {
     setCollapse() {
-      console.log('setCollapse', this.isCollapse);
       this.isCollapse = !this.isCollapse;
     },
     setMenuList(menuList: Menu.MenuOptions[]) {

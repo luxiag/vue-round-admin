@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider collapsible class="layout-sider">
+  <a-layout-sider v-model:collapsed="isCollapse" collapsible class="layout-sider">
     <div class="logo" />
     <a-menu mode="inline" theme="dark">
       <template v-for="item in menuList" :key="item.path">
@@ -27,8 +27,10 @@
   import { useMenuStore } from '@/store/modules/menu';
   import subMenu from './subMenu.vue';
   import { PieChartOutlined } from '@ant-design/icons-vue';
+  import { storeToRefs } from 'pinia';
   const menu = useMenuStore();
   const menuList = menu.getMenuList;
+  const { isCollapse } = storeToRefs(menu);
 </script>
 <style lang="less">
   .layout-sider {
