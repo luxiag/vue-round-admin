@@ -28,7 +28,7 @@
     padding: 15px;
     .header-menu__fold {
       font-size: 18px;
-      margin-right: 10px;
+      margin-right: 18px;
     }
   }
 </style>
