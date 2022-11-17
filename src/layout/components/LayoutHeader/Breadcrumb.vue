@@ -1,12 +1,12 @@
 <template>
   <a-breadcrumb :routes="routes">
-    <template #itemRender="{ route, paths }">
+    <template #itemRender="{ route: bread, paths }">
       <!-- 最后一个不跳转 -->
-      <span v-if="routes.indexOf(route) === routes.length - 1">
-        {{ route.title }}
+      <span v-if="routes.indexOf(bread) === routes.length - 1">
+        {{ bread.title }}
       </span>
       <router-link v-else :to="`/${paths.join('/')}`">
-        {{ route.title }}
+        {{ bread.title }}
         <!-- {{ paths.join('/') }} -->
       </router-link>
     </template>
