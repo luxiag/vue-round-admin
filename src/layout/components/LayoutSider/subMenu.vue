@@ -8,7 +8,7 @@
           <template #icon>
             <PieChartOutlined />
           </template>
-          {{ item.title }}
+          {{ item.meta.title }}
         </a-menu-item>
       </template>
       <template v-else>
@@ -21,7 +21,7 @@
   import { PieChartOutlined } from '@ant-design/icons-vue';
 
   import { SubMenu as ASubMenu, MenuItem as AMenuItem } from 'ant-design-vue';
-  import { defineProps, toRefs, type PropType, onMounted } from 'vue';
+  import { defineProps, toRefs, type PropType } from 'vue';
   const props = defineProps({
     menuInfo: {
       type: Object as PropType<Menu.MenuOptions>,
@@ -29,9 +29,5 @@
     },
   });
   const { menuInfo } = toRefs(props);
-
-  onMounted(() => {
-    console.log(menuInfo.value, 'menuInfo');
-  });
 </script>
 <style lang="less" scoped></style>

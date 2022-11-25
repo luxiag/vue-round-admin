@@ -3,10 +3,10 @@
     <template #itemRender="{ route: bread, paths }">
       <!-- 最后一个不跳转 -->
       <span v-if="routes.indexOf(bread) === routes.length - 1">
-        {{ bread.title }}
+        {{ bread.meta?.title }}
       </span>
       <router-link v-else :to="`/${paths.join('/')}`">
-        {{ bread.title }}
+        {{ bread.meta?.title }}
         <!-- {{ paths.join('/') }} -->
       </router-link>
     </template>

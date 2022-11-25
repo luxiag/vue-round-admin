@@ -7,7 +7,7 @@ interface tabState {
 }
 
 export const useTabStore = defineStore({
-  id: 'MenuStore',
+  id: 'TabsStore',
   state: (): tabState => ({
     tabsList: [],
   }),
@@ -21,6 +21,9 @@ export const useTabStore = defineStore({
       if (this.tabsList.every((item) => item.path !== tabItem.path)) {
         this.tabsList.push(tabItem);
       }
+    },
+    resetTabs() {
+      this.tabsList = [];
     },
   },
   persist: piniaPersistConfig('TabsStore'),

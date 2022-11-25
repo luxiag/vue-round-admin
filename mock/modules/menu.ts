@@ -1,21 +1,36 @@
 import { requestParams, resultError, resultSuccess } from './../_util';
 import { MockMethod } from 'vite-plugin-mock';
 import { createUserList } from './user';
+// vue-router 导航模式
+// 1. name router.push({name:'routerName'})
+// 2. path router.push({path: 'path'})
+//     children 跳转 子path
+
 const dashboardRoute = {
   path: '/dashboard',
-  title: 'Dashboard',
+  name: 'Dashboard',
   component: 'LAYOUT',
+  meta: {
+    title: 'Dashboard',
+  },
   redirect: '/dashboard/analysis',
+
   children: [
     {
       path: 'analysis',
-      title: 'analysis',
+      name: 'analysis',
       component: '/dashboard/analysis/index',
+      meta: {
+        title: 'analysis',
+      },
     },
     {
       path: 'workbench',
-      title: 'workbench',
+      name: 'workbench',
       component: '/dashboard/workbench/index',
+      meta: {
+        title: 'workbench',
+      },
     },
   ],
 };
