@@ -38,7 +38,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    'vue/no-unused-vars': 'error',
+    'vue/no-unused-vars': 'warn',
     'no-unused-vars': ['warn'],
     // 去除 ts 函数要显式的放回
     '@typescript-eslint/explicit-function-return-type': 'off',

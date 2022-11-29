@@ -81,7 +81,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 0px 15px;
+    height: revert;
+    line-height: revert;
+    border-bottom: 1px solid #f6ecec;
     .header-menu__fold {
       font-size: 18px;
       margin-right: 18px;
@@ -94,9 +97,13 @@
     .header_right {
       cursor: pointer;
       .user_detail {
+        padding: 10px 15px;
         .user_avatar {
           margin-right: 10px;
         }
+      }
+      .user_detail:hover {
+        background-color: #f3f3f3;
       }
     }
   }
