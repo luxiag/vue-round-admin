@@ -51,7 +51,9 @@
     const breads = getRoutesBread(menus, matched);
     return [
       {
-        title: 'home',
+        meta: {
+          title: 'home',
+        },
         path: '/',
         children: menus,
       },

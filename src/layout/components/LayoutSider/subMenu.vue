@@ -1,7 +1,7 @@
 <template>
   <a-sub-menu :key="menuInfo.path">
     <template #icon> <PieChartOutlined /></template>
-    <template #title>{{ menuInfo.title }}</template>
+    <template #title>{{ menuInfo.meta.title }}</template>
     <template v-for="item in menuInfo.children" :key="item.path">
       <template v-if="!item.children">
         <a-menu-item :key="item.path">
