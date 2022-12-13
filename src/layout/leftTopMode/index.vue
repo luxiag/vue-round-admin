@@ -1,7 +1,7 @@
 <template>
   <layout class="left-top-mode">
     <layout-sider v-model:collapsed="isCollapse" collapsible>
-      <Sider />
+      <Sider :collapsed="isCollapse" />
     </layout-sider>
     <layout>
       <layout-header style="background: #fff; padding: 0"> <Header /></layout-header>
