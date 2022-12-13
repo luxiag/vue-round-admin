@@ -4,12 +4,16 @@ import { createUserList } from './user';
 const dashboardRoute = {
   path: '/dashboard',
   name: 'Dashboard',
+  title: 'Dashboard',
   component: 'LAYOUT',
   redirect: '/dashboard/analysis',
+  icon: 'shouye',
   children: [
     {
       path: 'analysis',
+      title: 'analysis',
       component: '/dashboard/analysis/index',
+      name: 'analysis',
     },
   ],
 };

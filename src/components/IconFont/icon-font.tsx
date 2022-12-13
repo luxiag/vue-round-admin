@@ -1,8 +1,8 @@
-import { createFromIconfontCN } from '@ant-design/icons-vue';
 import { defineComponent, computed, unref } from 'vue';
 import type { PropType } from 'vue';
 import { isString } from '@/utils/is';
 import { IconUrl } from '@/utils/const';
+import { createFromIconfontCN } from '@ant-design/icons-vue';
 
 // const IconFont = createFromIconfontCN({
 //   scriptUrl,
