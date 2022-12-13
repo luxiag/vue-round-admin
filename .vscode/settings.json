@@ -4,6 +4,7 @@
         "commitlint",
         "Persistedstate",
         "Pinia",
-        "Sider"
+        "Sider",
+        "XIAG"
     ]
 }

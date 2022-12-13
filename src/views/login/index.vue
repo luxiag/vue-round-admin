@@ -45,8 +45,8 @@
   const formRef = ref();
 
   const formState = reactive<FormState>({
-    username: '',
-    password: '',
+    username: 'admin',
+    password: '123456',
   });
 
   const onFinish = async (values: any) => {

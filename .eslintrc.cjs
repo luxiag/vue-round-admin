@@ -32,8 +32,14 @@ module.exports = {
   ],
   plugins: ['vue', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
-    'vue/no-unused-vars': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'vue/no-unused-vars': 'warn',
+    'no-unused-vars': ['warn'],
     // 去除 ts 函数要显式的放回
     '@typescript-eslint/explicit-function-return-type': 'off',
     //  开启隐式转换
@@ -72,4 +78,5 @@ module.exports = {
     //   },
     // ],
   },
+  globals: { defineOptions: 'writable', Menu: 'writable' },
 };
