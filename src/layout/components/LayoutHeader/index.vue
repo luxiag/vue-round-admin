@@ -28,7 +28,7 @@
               <a href="javascript:;">2nd menu item</a>
             </a-menu-item>
             <a-menu-item key="logout">
-              <span>退出登陆</span>
+              <span>{{ $t('layout.header.dropdown') }}</span>
             </a-menu-item>
           </a-menu>
         </template>

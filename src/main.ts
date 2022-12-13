@@ -4,7 +4,7 @@ import { setupRouter } from './router';
 import { setupAntd } from '@/plugins';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
-import { setupI18n } from './locales';
+import { setupI18n } from '@/locales';
 import '@/styles/index.less';
 
 import { router } from '@/router';
