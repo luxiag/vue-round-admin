@@ -6,7 +6,8 @@
       <template v-if="!item.children">
         <a-menu-item :key="item.path">
           <template #icon>
-            <PieChartOutlined />
+            <!-- <PieChartOutlined /> -->
+            <icon-font type="fuwushang-jiesuan" />
           </template>
           {{ item.meta.title }}
         </a-menu-item>
@@ -19,7 +20,7 @@
 </template>
 <script setup lang="ts">
   import { PieChartOutlined } from '@ant-design/icons-vue';
-
+  import IconFont from '@/components/IconFont/IconFont.vue';
   import { SubMenu as ASubMenu, MenuItem as AMenuItem } from 'ant-design-vue';
   import { defineProps, toRefs, type PropType } from 'vue';
   const props = defineProps({

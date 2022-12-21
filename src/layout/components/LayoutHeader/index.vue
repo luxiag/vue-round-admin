@@ -10,70 +10,24 @@
     </div>
 
     <div class="header_right">
-      <a-dropdown>
-        <span class="user_detail">
-          <span class="user_avatar"
-            ><a-avatar size="small" src="https://joeschmoe.io/api/v1/random"
-          /></span>
-          <span class="user_name">
-            {{ userStore.getUserInfo?.username }}
-          </span>
-        </span>
-        <template #overlay>
-          <a-menu @click="handleMenuClick">
-            <a-menu-item>
-              <a href="javascript:;">1st menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">2nd menu item</a>
-            </a-menu-item>
-            <a-menu-item key="logout">
-              <span>{{ $t('layout.header.dropdown') }}</span>
-            </a-menu-item>
-          </a-menu>
-        </template>
-      </a-dropdown>
+      <SwitchLangVue />
+      <User />
     </div>
   </layout-header>
 </template>
 <script setup lang="ts">
-  import {
-    LayoutHeader,
-    Dropdown as ADropdown,
-    Menu as AMenu,
-    MenuItem as AMenuItem,
-    Avatar as AAvatar,
-  } from 'ant-design-vue';
+  import { LayoutHeader } from 'ant-design-vue';
   import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
   import { useMenuStore } from '@/store/modules/menu';
   import { storeToRefs } from 'pinia';
-  import Breadcrumb from './Breadcrumb.vue';
-  import { useUserStore } from '@/store/modules/user';
-  import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
-  import { useConfirm } from '@/hooks/useMessage';
-  const userStore = useUserStore();
+  import Breadcrumb from './components/Breadcrumb.vue';
+  import User from './components/User.vue';
+  import SwitchLangVue from './components/SwitchLang.vue';
   const menuStore = useMenuStore();
   const { isCollapse } = storeToRefs(menuStore);
   // 切换菜单状态
   const switchCollapse = () => {
     menuStore.setCollapse();
-  };
-  type MenuEvent = 'logout' | 'lock';
-
-  const handleMenuClick = (e: MenuInfo) => {
-    switch (e.key as MenuEvent) {
-      case 'logout':
-        handleLogout();
-        break;
-    }
-  };
-  const handleLogout = () => {
-    useConfirm({
-      content: '确认退出吗？',
-      async onOk() {
-        userStore.logout();
-      },
-    });
   };
 </script>
 <style lang="less">
@@ -96,13 +50,13 @@
     }
     .header_right {
       cursor: pointer;
-      .user_detail {
+      .detail {
         padding: 10px 15px;
         .user_avatar {
           margin-right: 10px;
         }
       }
-      .user_detail:hover {
+      .detail:hover {
         background-color: #f3f3f3;
       }
     }

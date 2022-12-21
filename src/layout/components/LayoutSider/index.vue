@@ -6,7 +6,7 @@
         <template v-if="!item.children">
           <a-menu-item :key="item.path">
             <template #icon>
-              <PieChartOutlined />
+              <!-- <PieChartOutlined /> -->
             </template>
             {{ item.meta.title }}
           </a-menu-item>
@@ -27,6 +27,7 @@
   import { useRouter } from 'vue-router';
   import { useMenuStore } from '@/store/modules/menu';
   import subMenu from './subMenu.vue';
+  import IconFontVue from '@/components/IconFont/IconFont.vue';
   import { PieChartOutlined } from '@ant-design/icons-vue';
   import { storeToRefs } from 'pinia';
   import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
