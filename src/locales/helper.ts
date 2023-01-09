@@ -11,12 +11,12 @@ export function setLoadLocalePool(cb: (loadLocalePool: LocaleType[]) => void) {
   cb(loadLocalePool);
 }
 
-export function genMessage(langs: Record<string, any>, prefix = 'lang') {
+export async function genMessage(langs: Record<string, any>, prefix = 'lang') {
   const obj: Recordable = {};
-
-  Object.keys(langs).forEach((key) => {
-    const langFileModule = langs[key].default;
-    console.log(langFileModule, key, 'langFileModule');
+  const keys = Object.keys(langs);
+  for (const key of keys) {
+    const langFileModule = await langs[key]();
+    console.log(langFileModule.default, key);
     let fileName = key.replace(`./${prefix}/`, '').replace(/^\.\//, '');
     const lastIndex = fileName.lastIndexOf('.');
     fileName = fileName.substring(0, lastIndex);
@@ -27,12 +27,12 @@ export function genMessage(langs: Record<string, any>, prefix = 'lang') {
     if (moduleName) {
       if (objKey) {
         set(obj, moduleName, obj[moduleName] || {});
-        set(obj[moduleName], objKey, langFileModule);
+        set(obj[moduleName], objKey, langFileModule.default);
+        console.log(obj, langFileModule.default, 'set');
       } else {
-        set(obj, moduleName, langFileModule || {});
+        set(obj, moduleName, langFileModule.default || {});
       }
     }
-  });
-
+  }
   return obj;
 }

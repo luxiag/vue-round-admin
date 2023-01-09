@@ -41,6 +41,7 @@ export function useLocale() {
       setI18nLanguage(locale);
       return locale;
     }
+    console.log(locale, 'locale');
     const langModule = (await import(`./lang/${locale}.ts`)).default as LangModule;
     if (!langModule) return;
     const { message } = langModule;
@@ -48,6 +49,7 @@ export function useLocale() {
     loadLocalePool.push(locale);
 
     setI18nLanguage(locale);
+    console.log(i18n, 'i18n');
     return locale;
   }
   return {

@@ -1,10 +1,10 @@
 import antdLocale from 'ant-design-vue/es/locale/en_US';
 import { genMessage } from '../helper';
 
-const modulesFiles = import.meta.glob('./zh-CN/**/*.ts');
+const modulesFiles = import.meta.glob('./en-US/**/*.ts');
 export default {
   message: {
-    ...genMessage(modulesFiles, 'en-US'),
+    ...(await genMessage(modulesFiles, 'en-US')),
     antdLocale,
   },
   dateLocale: null,

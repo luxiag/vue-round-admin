@@ -45,6 +45,7 @@ module.exports = {
     //  开启隐式转换
     // https://typescript-eslint.io/rules/strict-boolean-expressions/
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
     'vue/multi-word-component-names': [
       'off',
       {
