@@ -28,7 +28,6 @@
   import { storeToRefs } from 'pinia';
   import { LocaleType } from '@/locales/config';
   import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
-  import { changeLang } from '@/locales/index';
   import { useLocale } from '@/locales/useLocale';
   const localStorage = useLocaleStore();
   const { locale } = storeToRefs(localStorage);
