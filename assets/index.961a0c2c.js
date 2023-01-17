@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.cdc0426e.js";import{l as r,f as c}from"./index.d3b24030.js";const n={};function o(t,s){return r(),c("div",null,"workbench")}const f=e(n,[["render",o]]);export{f as default};

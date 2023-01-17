@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper.cdc0426e.js";import{l as r,f as c}from"./index.403bb321.js";const n={};function o(t,s){return r(),c("div",null,"embedded")}const d=e(n,[["render",o]]);export{d as default};
