@@ -1,1 +1,0 @@
-import{q as o,i as a,M as i}from"./index.403bb321.js";const c=()=>o,s=t=>{const e={...t,title:t.title??"\u63D0\u793A",content:a("div",{style:t.style},t.content??"")};return i.confirm(e)};export{s as a,c as u};
