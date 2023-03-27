@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint  src/* --ext .js,.jsx,.ts,.tsx,.vue --fix --quiet ./",
     "prepare": "husky install",
-    "deploy": "node ./deploy"
+    "deploy": "bash ./deploy.sh"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",

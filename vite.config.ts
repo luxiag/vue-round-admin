@@ -17,6 +17,7 @@ const viteConfig = ({ command, mode }: ConfigEnv): UserConfig => {
     '@': pathResolve('src'),
   };
   return {
+    base: '/vue-round-admin/',
     plugins: [
       vue(),
       vueJsx(),
@@ -37,6 +38,9 @@ const viteConfig = ({ command, mode }: ConfigEnv): UserConfig => {
     root: process.cwd(),
     resolve: {
       alias,
+    },
+    build: {
+      target: 'esnext',
     },
   };
 };

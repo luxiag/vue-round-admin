@@ -1,15 +1,15 @@
 <template>
   <a-sub-menu :key="menuInfo.path">
-    <template #icon> <PieChartOutlined /></template>
-    <template #title>{{ menuInfo.meta.title }}</template>
+    <template #icon> <icon-font type="icon-shouye" /></template>
+    <template #title>{{ $t('routes.menu.' + menuInfo.meta.title) }}</template>
     <template v-for="item in menuInfo.children" :key="item.path">
       <template v-if="!item.children">
         <a-menu-item :key="item.path">
           <template #icon>
             <!-- <PieChartOutlined /> -->
-            <icon-font type="fuwushang-jiesuan" />
+            <icon-font :type="item.meta?.icon" />
           </template>
-          {{ item.meta.title }}
+          {{ $t('routes.menu.' + item.meta.title) }}
         </a-menu-item>
       </template>
       <template v-else>
@@ -19,7 +19,6 @@
   </a-sub-menu>
 </template>
 <script setup lang="ts">
-  import { PieChartOutlined } from '@ant-design/icons-vue';
   import IconFont from '@/components/IconFont/IconFont.vue';
   import { SubMenu as ASubMenu, MenuItem as AMenuItem } from 'ant-design-vue';
   import { defineProps, toRefs, type PropType } from 'vue';

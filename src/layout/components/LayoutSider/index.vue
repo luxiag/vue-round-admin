@@ -8,7 +8,7 @@
             <template #icon>
               <!-- <PieChartOutlined /> -->
             </template>
-            {{ item.meta.title }}
+            {{ $t('routes.menu.' + item.meta.title) }}
           </a-menu-item>
         </template>
         <template v-else>

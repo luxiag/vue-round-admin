@@ -2,7 +2,10 @@
   <div class="layout-sider">
     <a-tabs :active-key="activeKey" type="editable-card" hide-add @change="handleChange">
       <template v-for="tab in tabsList" :key="tab.path">
-        <a-tab-pane :closable="!tab.meta?.affix" :tab="tab.meta?.title"></a-tab-pane>
+        <a-tab-pane
+          :closable="!tab.meta?.affix"
+          :tab="$t('routes.menu.' + tab.meta?.title)"
+        ></a-tab-pane>
       </template>
     </a-tabs>
   </div>

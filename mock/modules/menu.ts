@@ -8,11 +8,12 @@ import { createUserList } from './user';
 
 const dashboardRoute = {
   path: '/dashboard',
-  name: 'Dashboard',
+  name: 'dashboard',
   title: 'Dashboard',
   component: 'LAYOUT',
   meta: {
-    title: 'Dashboard',
+    title: 'dashboard',
+    icon: 'icon-shouye',
   },
   redirect: '/dashboard/analysis',
 

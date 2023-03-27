@@ -20,7 +20,7 @@ async function createI18nOptions(): Promise<I18nOptions> {
   setLoadLocalePool((loadLocalePool) => {
     loadLocalePool.push(locale);
   });
-  // console.log(message, locale, 'message');
+  console.log(message, locale, 'message');
   return {
     locale,
     messages: {
