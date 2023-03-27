@@ -1,1 +1,0 @@
-import{_ as a}from"./index.5a6bb36d.js";const o=async()=>await a(()=>import("./index.86828a41.js"),["assets/index.86828a41.js","assets/index.c4e6e775.css","assets/index.5a6bb36d.js","assets/index.eca4f458.css","assets/useMessage.6324c982.js","assets/_plugin-vue_export-helper.cdc0426e.js"]),r={path:"/dashboard",name:"Dashboard",component:o};export{r as default};

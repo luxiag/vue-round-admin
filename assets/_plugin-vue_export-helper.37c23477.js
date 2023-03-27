@@ -1,0 +1,1 @@
+import{q as s,i as a,M as r}from"./index.1c6716b4.js";const f=()=>s,u=t=>{const e={...t,title:t.title??"\u63D0\u793A",content:a("div",{style:t.style},t.content??"")};return r.confirm(e)},l=(t,e)=>{const o=t.__vccOpts||t;for(const[c,n]of e)o[c]=n;return o};export{l as _,u as a,f as u};
