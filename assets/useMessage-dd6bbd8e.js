@@ -1,0 +1,1 @@
+import{aN as a,i as o,aO as i}from"./index-8b0c8213.js";const c=()=>a,s=t=>{const e={...t,title:t.title??"提示",content:o("div",{style:t.style},t.content??"")};return i.confirm(e)};export{s as a,c as u};
