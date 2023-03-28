@@ -6,7 +6,7 @@
         <template v-if="!item.children">
           <a-menu-item :key="item.path">
             <template #icon>
-              <!-- <PieChartOutlined /> -->
+              <icon-font type="icon-shouye" />
             </template>
             {{ $t('routes.menu.' + item.meta.title) }}
           </a-menu-item>
