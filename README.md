@@ -1,8 +1,8 @@
-# Vue 3.2 + TypeScript + Pinia + Vite3 + Antd Design Vue
+# Vue 3.2 + TypeScript + Pinia + Vite4 + Antd Design Vue 3
 
 ## 前言
 
-基于 Vue3.2、TypeScript、Vite3、Pinia、Antd Design Vue 开源的一套后台管理模版，
+基于 Vue3.2、TypeScript、Vite4、Pinia、Antd Design Vue 3 开源的一套后台管理模版，
 
 部分设计参考了 [vue-vben-admin](https://github.com/vbenjs/vue-vben-admin)
 
